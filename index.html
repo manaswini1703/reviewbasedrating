@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,22 +11,62 @@
   
     
     <title>Model Deployment</title>
+    <style type="text/css">
+      .text-center1{
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      position: relative;
+      text-align: center;
+      height: 600px;
+      background-color:#ccccff;
+    }
+    .jumbotron{
+      text-align: center;
+    }
+    .button1{
+      border: 2px solid #000000;
+      text-align: center;
+      background-color:#7b68ee;
+      padding: 10px 24px;
+    }
+  
+    </style>
   </head>
   <body style="margin: 0;padding: 0;">
-    <div class="text-center">
+    <div class="jumbotron" style="background-color:#cec8ef"> 
+      <div class = "row">
+        <div class = "col"> <h1> Review based Rating System</h1> </div>
+      </div>
+  </div>
+
+<div class="text-center1">
+
+  <marquee bgcolor="#eObOff">
+    <h3>Enter your review to predict the rating</h3>
+  </marquee>
+
+  <br>
+  <br>
+  <br>
+  <form action="/" method="POST" style="max-width: 480px;margin: auto;">
+
+    <label for="reviewi" class="sr-only">Review</label>
     
-      <form action="/" method="POST" style="max-width: 480px;margin: auto;">
-        <h3 class="mt-4 mb-4 font-weight-normal">Predict rating using your review text</h3>
-        <label for="reviewi" class="sr-only">Review</label>
-        <textarea name="rev" id="reviewi" class="form_control" placeholder="review text" class="mt-4 mb-4" required autofocus>
+    <textarea name="rev" id="reviewi" class="form_control" placeholder="review text" row = "10" cols = "70" class="mt-4 mb-4" required autofocus></textarea>
+    <br>
+    <br>
+    <br>
+    <button class='button1'class="mt-4 mb-4" style="background-color:#cec8ef">Predict</button>
 
-        </textarea><br>
-        <button class='btn btn-success'class="mt-4 mb-4">Predict</button>
+  </form>
 
-      </form>
-   <p class="mt-4 mb-4"> Your predicted rating is </p>
+   <h5 class="mt-4 mb-4" ali> Your predicted rating is </h5>
     {{my_rating}}
-    </div>
+  
+</div>
+
+      
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -34,15 +75,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>
-
-    
-    
-    
-           
-  
-    
-
- 
-   
-
-    

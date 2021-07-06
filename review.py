@@ -32,7 +32,7 @@ def rating_prediction(review):
     stop_words = set(stopwords.words('english'))
     def normalizer(tweet):
         aplhabets = re.sub("[^a-zA-Z]", " ",tweet)
-        tokens = nltk.word_tokenize(aplhabets)[2:]
+        tokens = nltk.word_tokenize(aplhabets)
         lower_case = [l.lower() for l in tokens]
         processed_words = list(filter(lambda l: l not in stop_words, lower_case))
         lemmas = [wordnet_lemmatizer.lemmatize(t) for t in processed_words]
@@ -45,16 +45,16 @@ def rating_prediction(review):
     def sentiment(tweet):
         return textblob.TextBlob(tweet).sentiment.polarity
     def feauture_labelling(score):
-        if (score >= 1):
-            return 5
-        elif (score <= -1):
+        if score>=-1 and score<-0.5:
             return 1
-        elif ((score > -0.5) and (score < 0.5)):
+        elif score>=-0.5 and score<-0.1:
+            return 2
+        elif score>=-0.1 and score<0.2:
             return 3
-        elif ((score >= 0.5) and (score < 1)):
+        elif score>=0.2 and score<0.6:
             return 4
-        elif ((score <= -0.5) and (score > -1)):
-             return 2
+        else:
+            return 5
     test_data["processed_tweets"]=test_data["normalized_Tweets"].apply(lambda x: " ".join(list(x)))
     test_data["sentiment"]=test_data["processed_tweets"].apply(lambda x: sentiment(x))
     test_data["Target_label"]=np.nan
@@ -69,7 +69,17 @@ def rating_prediction(review):
     clf2.fit(x_train, y_train)
     n_sample=normalizer(review)
     processed_string=' '.join(n_sample)
-    score=sentiment(processed_string)
+    if len(review)!= 0:
+        if len(review) == 1:
+            return "Enter the proper input"
+        elif "not" in review:
+            score=sentiment(processed_string)*-0.5
+        else:
+            score=sentiment(processed_string)
+    else:
+        return "Your input is empty, please Enter the input"
+    ypd=clf2.predict(np.asarray([score]))
+
     x_test=np.array(score)
     x_test=x_test.reshape((1,-1))
     return clf2.predict(x_test)
